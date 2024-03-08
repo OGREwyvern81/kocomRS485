@@ -245,6 +245,9 @@ class rs485:
     def _mqtt(self):
         return self._mqtt_config
 
+    def connect_mqtt(self, server, name):
+        mqtt_client = mqtt.Client(callback_api_version=mqtt.MQTTv5)
+    
     def connect_serial(self, port):
         ser = {}
         opened = 0
@@ -1137,6 +1140,9 @@ class Grex:
         mqtt_client.connect(server['server'], 1883, 60)
         mqtt_client.loop_start()
         return mqtt_client
+
+    def connect_mqtt(self, server, name):
+        mqtt_client = mqtt.Client(callback_api_version=mqtt.MQTTv5)
 
     def on_message(self, client, obj, msg):
         _topic = msg.topic.split('/')
